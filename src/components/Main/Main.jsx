@@ -17,7 +17,10 @@ export default function Main() {
   const [formData, setFormData] = useState(initialFormData)
 
   useEffect(() => {
-    console.log(`Pubblico?: ${formData.published}`)
+    alert(
+      formData.published ? "L'articolo sarà pubblicato" : "L'articolo non sarà pubblicato"
+    )
+    console.log(`pubblico: ${formData.published}`)
   }, [formData.published])
 
 
