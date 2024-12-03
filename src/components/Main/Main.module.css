@@ -1,10 +1,4 @@
-/* .section {
-  padding: 50px 0;
-} */
-
 form {
-  margin-top: 2rem;
-  margin-left: 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -22,8 +16,7 @@ form {
 
 ul {
   list-style: disc;
-  margin-left: 3.5rem;
-  margin-top: 1rem;
+
 
   li {
     display: flex;
@@ -45,11 +38,12 @@ ul {
 .section {
   width: 500px;
   margin: 0 auto;
+  background-color: rgb(206, 190, 190);
+  padding: 0.3rem;
 }
 
-/* .listItem {
-  width: 300px;
+.published {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-} */
+  gap: 1rem;
+}
