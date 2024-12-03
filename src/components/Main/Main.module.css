@@ -1,0 +1,55 @@
+/* .section {
+  padding: 50px 0;
+} */
+
+form {
+  margin-top: 2rem;
+  margin-left: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+
+  button {
+    background-color: blue;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+}
+
+ul {
+  list-style: disc;
+  margin-left: 3.5rem;
+  margin-top: 1rem;
+
+  li {
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    background-color: red;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 10px;
+    margin-left: auto;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+
+}
+
+.section {
+  width: 500px;
+  margin: 0 auto;
+}
+
+/* .listItem {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
