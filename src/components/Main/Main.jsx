@@ -8,18 +8,25 @@ const initialFormData = {
   image: "",
   content: "",
   tags: [],
-  published: true,
+  published: false
 }
 
 export default function Main() {
 
   const [posts, setPosts] = useState(initialPosts)
   const [formData, setFormData] = useState(initialFormData)
+  const [isFirstRender, setIsFirstRender] = useState(true)
 
   useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false) //evita di eseguire il rendering inizialmente 
+      return
+    }
+    formData.published
     alert(
       formData.published ? "L'articolo sarà pubblicato" : "L'articolo non sarà pubblicato"
-    )
+    );
+
     console.log(`pubblico: ${formData.published}`)
   }, [formData.published])
 
@@ -72,6 +79,7 @@ export default function Main() {
           <button type="submit"> Aggiungi</button>
         </form>
         <div className={style.listItem}>
+          <h3>Lista dei blog  </h3>
           <ul>
             {posts.filter(post => post.published === true).map(post => (
 
