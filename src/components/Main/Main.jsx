@@ -1,37 +1,51 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Card from '../Card/Card'
 import style from './Main.module.css'
 import initialPosts from '../posts'
 
+const initialFormData = {
+  title: "",
+  image: undefined,
+  content: "",
+  tags: [],
+  published: true,
+}
+
 export default function Main() {
 
   const [posts, setPosts] = useState(initialPosts)
-  const [title, setTitle] = useState('')
-  const [newTag, setTag] = useState('')
+  const [formData, setFormData] = useState(initialFormData)
+
+  useEffect(() => {
+    console.log(`Pubblico?: ${formData.published}`)
+  }, [formData.published])
 
 
 
-  const addBlog = event => {
-    event.preventDefault()
-    console.log("Titolo inviato:" + title)
-    console.log("tag inviato:" + newTag)
+  function handleFormData(e) {
+    const newFormData = {
+      ...formData,
+      [e.target.name]: e.target.value,
+    }
+    setFormData(newFormData)
+  }
 
+
+  function addBlog(e) {
+    e.preventDefault()
+    if (formData.title === '') return
 
     const newBlog = {
       id: Date.now(),
-      title: title,
-      image: undefined,
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Numquam eaque vero unde ipsa aut veritatis labore quidem ut fuga! Dolorum odit maxime iusto harum, doloremque provident nisi porro vero quidem.",
-      tags: newTag.split(',').map(el => el.trim()), //Separare i tag da virgole in un array, perche nella card tags è un array e dopo rimuovo gli spazi su ogni elemento dell'array
-      published: true,
+      ...formData,
+      tags: formData.tags.split(',').map(el => el.trim())
     }
 
-    if (title === '') return
-
     setPosts([...posts, newBlog])
-    setTitle('')
-    setTag('')
+    setFormData(initialFormData)
+    console.log("aggiungo un nuovo post")
   }
+
 
   function deleteBlog(blogtext) {
     setPosts(posts.filter(post => post !== blogtext))
@@ -41,8 +55,9 @@ export default function Main() {
     <main>
       <section className={style.section}>
         <form onSubmit={addBlog} action="">
-          <input type="text" value={title} onChange={e => { setTitle(e.target.value) }} placeholder="Inserisci il titolo" />
-          <input type="text" value={newTag} onChange={e => { setTag(e.target.value) }} placeholder="Inserisci il tag" />
+          <input type="text" name="title" value={formData.title} onChange={handleFormData} placeholder="Inserisci il titolo" />
+          <input type="text" name="tags" value={formData.tags} onChange={handleFormData} placeholder="Inserisci i tag" />
+          <input type="text" name="content" value={formData.content} onChange={handleFormData} placeholder="Inserisci del contenuto" />
           <button type="submit"> Aggiungi</button>
         </form>
         <div className={style.listItem}>
@@ -69,6 +84,7 @@ export default function Main() {
                       title={post.title}
                       tags={post.tags}
                       image={post.image}
+                      content={post.content}
                       published={post.published}
                     />
                   </div>
